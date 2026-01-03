@@ -20,13 +20,13 @@ jobs:
         dotnet-version: '8.0.x'
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore FanControl.THV2Ultra.sln
     
     - name: Run tests
-      run: dotnet test --no-restore -c Release --verbosity normal
+      run: dotnet test FanControl.THV2Ultra.sln --no-restore -c Release --verbosity normal
     
     - name: Build Release
-      run: dotnet build --no-restore -c Release
+      run: dotnet build FanControl.THV2Ultra.sln --no-restore -c Release
     
     - name: Create release package
       run: |

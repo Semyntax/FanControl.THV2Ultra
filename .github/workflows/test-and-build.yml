@@ -19,13 +19,13 @@ jobs:
         dotnet-version: '8.0.x'
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore FanControl.THV2Ultra.sln
     
     - name: Build
-      run: dotnet build --no-restore -c Release
+      run: dotnet build FanControl.THV2Ultra.sln --no-restore -c Release
     
     - name: Test
-      run: dotnet test --no-build --no-restore -c Release --verbosity normal
+      run: dotnet test FanControl.THV2Ultra.sln --no-build --no-restore -c Release --verbosity normal
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
