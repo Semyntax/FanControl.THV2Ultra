@@ -1,0 +1,37 @@
+name: Test and Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-build:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore FanControl.THV2Ultra.sln
+    
+    - name: Build
+      run: dotnet build FanControl.THV2Ultra.sln --no-restore -c Release
+    
+    - name: Test
+      run: dotnet test FanControl.THV2Ultra.sln --no-build --no-restore -c Release --verbosity normal
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: FanControl.THV2Ultra
+        path: Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll
+        if-no-files-found: error
