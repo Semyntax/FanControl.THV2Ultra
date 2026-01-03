@@ -32,7 +32,6 @@ jobs:
       run: |
         New-Item -ItemType Directory -Path "release-package" -Force
         Copy-Item "Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll" -Destination "release-package/"
-        Copy-Item "Source/bin/Release/net8.0-windows/win-x64/HidSharp.dll" -Destination "release-package/"
         Compress-Archive -Path "release-package/*" -DestinationPath "FanControl.THV2Ultra-${{ github.ref_name }}.zip"
       shell: pwsh
     
@@ -42,7 +41,6 @@ jobs:
         files: |
           FanControl.THV2Ultra-${{ github.ref_name }}.zip
           Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll
-          Source/bin/Release/net8.0-windows/win-x64/HidSharp.dll
         generate_release_notes: true
         draft: false
         prerelease: false

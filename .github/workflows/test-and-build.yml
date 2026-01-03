@@ -31,7 +31,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: FanControl.THV2Ultra
-        path: |
-          Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll
-          Source/bin/Release/net8.0-windows/win-x64/HidSharp.dll
+        path: Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll
         if-no-files-found: error
