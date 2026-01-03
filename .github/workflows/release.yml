@@ -22,11 +22,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore FanControl.THV2Ultra.sln
     
-    - name: Run tests
-      run: dotnet test FanControl.THV2Ultra.sln --no-restore -c Release --verbosity normal
-    
     - name: Build Release
       run: dotnet build FanControl.THV2Ultra.sln --no-restore -c Release
+    
+    - name: Run tests
+      run: dotnet test FanControl.THV2Ultra.sln --no-build --no-restore -c Release --verbosity normal
     
     - name: Create release package
       run: |
