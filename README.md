@@ -5,6 +5,9 @@ A [FanControl](https://github.com/Rem0o/FanControl.Releases) plugin that enables
 ## Features
 
 - Real-time liquid temperature monitoring
+<img width="378" height="31" alt="image" width="100%" src="https://github.com/user-attachments/assets/3594a989-5a9e-4627-a085-934bf8233695" />
+<br>
+<img width="234" height="207" alt="image" src="https://github.com/user-attachments/assets/03a5bfd8-b5ac-45a8-8f6c-717b5e80e3ae" />
 
 ## Installation
 
@@ -24,7 +27,7 @@ A [FanControl](https://github.com/Rem0o/FanControl.Releases) plugin that enables
 - [FanControl](https://github.com/Rem0o/FanControl.Releases) application
 - Thermaltake THV2 Ultra AIO cooler
 
-**Quick check via PowerShell for TVH2 Ultra Device**
+**Quick check via PowerShell for THV2 Ultra Device**
 ```powershell
 Get-PnpDevice | Where-Object { $_.InstanceId -like "*VID_264A*PID_233C*" }
 ```
