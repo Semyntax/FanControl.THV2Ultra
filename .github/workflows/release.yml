@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Run tests
+      run: dotnet test --no-restore -c Release --verbosity normal
+    
+    - name: Build Release
+      run: dotnet build --no-restore -c Release
+    
+    - name: Create release package
+      run: |
+        New-Item -ItemType Directory -Path "release-package" -Force
+        Copy-Item "Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll" -Destination "release-package/"
+        Copy-Item "Source/bin/Release/net8.0-windows/win-x64/HidSharp.dll" -Destination "release-package/"
+        Compress-Archive -Path "release-package/*" -DestinationPath "FanControl.THV2Ultra-${{ github.ref_name }}.zip"
+      shell: pwsh
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          FanControl.THV2Ultra-${{ github.ref_name }}.zip
+          Source/bin/Release/net8.0-windows/win-x64/FanControl.THV2Ultra.dll
+          Source/bin/Release/net8.0-windows/win-x64/HidSharp.dll
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
